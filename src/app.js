@@ -28,4 +28,7 @@ app.use('/', (req, res) => {
 require('./config/database');
 
 // Listen to the Server
-app.listen(PORT, () => console.log(`Listening to ${process.env.APP_URL}:${PORT}`));
+if (NODE_ENV == 'local') {
+	app.listen(PORT, () => console.log(`Listening to ${process.env.APP_URL}:${PORT}`));
+}
+app.listen();
