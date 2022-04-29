@@ -17,6 +17,7 @@ app.use(express.json());
 app.use(fileupload({ useTempFiles: true }));
 
 // Declare Routes
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/v1/farm', require('./routes/users/farm'));
 
 app.use('/', (req, res) => {
