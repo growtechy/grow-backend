@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(fileupload({ useTempFiles: true }));
 
 // Declare Routes
-app.use(express.static(path.join(__dirname, 'public')));
+app.use('/public', express.static('public'));
 app.use('/api/v1/farm', require('./routes/users/farm'));
 
 app.use('/', (req, res) => {
@@ -28,7 +28,7 @@ app.use('/', (req, res) => {
 require('./config/database');
 
 // Listen to the Server
-if (NODE_ENV == 'local') {
+if (process.env.NODE_ENV == 'local') {
 	app.listen(PORT, () => console.log(`Listening to ${process.env.APP_URL}:${PORT}`));
 }
 app.listen();
