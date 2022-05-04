@@ -29,6 +29,7 @@ const saveFarmLocation = async (req, res) => {
 		const addLocation = await FarmLocation({
 			farmType: req.body.farmType,
 			location: req.body.location,
+			userId: req.body.userId,
 			cordinate: [
 				{
 					longitude: req.body.longitude,
