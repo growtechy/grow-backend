@@ -67,7 +67,7 @@ const getSpecificFarm = async (req, res) => {
 			message: `Success`
 		});
 	} catch (error) {
-		res.status(401).json({
+		res.status(400).json({
 			data: [],
 			message: error.message
 		});
