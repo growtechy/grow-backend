@@ -7,7 +7,7 @@ const mg = mailgun.client({
 	public_key: process.env.MAILGUN_VALIDATION_KEY || 'pubkey-yourkeyhere'
 });
 
-const DOMAIN = process.env.NODE_ENV == 'local' ? process.env.MAILGUN_SANDBOX : process.env.MAILGUN_DOMAIN_LIVE;
+const DOMAIN = process.env.MAILGUN_DOMAIN_LIVE;
 
 const sendMail = async (data) => {
 	try {

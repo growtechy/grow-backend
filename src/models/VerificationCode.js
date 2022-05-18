@@ -105,10 +105,13 @@ verifySchema.statics.assignVerificationCode = async (userId, code, email, phoneN
 verifySchema.statics.verifyPhoneNumberOTP = async (userId, code) => {
 	const verify = await Verify.findOne({ userId: userId });
 
+	const user = await Users.findOne({ _id: userId });
+
 	await Users.findOneAndUpdate(
 		{ _id: userId },
 		{
 			isVerified: {
+				email: user.isVerified[0].email,
 				phoneNumber: true
 			}
 		}

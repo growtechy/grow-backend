@@ -78,7 +78,8 @@ const verifyEmail = async (req, res) => {
 			{ _id: req.query.id },
 			{
 				isVerified: {
-					email: true
+					email: true,
+					phoneNumber: user.isVerified[0].phoneNumber
 				}
 			}
 		);
