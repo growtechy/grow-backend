@@ -20,6 +20,7 @@ app.use(fileupload({ useTempFiles: true }));
 app.use('/public', express.static('public'));
 app.use('/api/v1/farm', require('./routes/users/farm'));
 app.use('/api/v1/auth', require('./routes/auth/main'));
+app.use('/api/v1/crop', require('./routes/crop/index'));
 
 app.use('/', (req, res) => {
 	res.send('Welcome to Growng');

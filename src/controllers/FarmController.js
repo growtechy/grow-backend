@@ -1,4 +1,5 @@
 const FarmLocation = require('../models/FarmLocation');
+const Portal = require('../models/Portal');
 
 const fetchFarmLocation = async (req, res) => {
 	try {
@@ -74,4 +75,80 @@ const getSpecificFarm = async (req, res) => {
 	}
 };
 
-module.exports = { fetchFarmLocation, saveFarmLocation, getSpecificFarm };
+
+const setupFarm = async (req, res) => {
+	try {
+
+		const data = await Portal(req.body).save();
+
+		res.status(200).json({
+			data: data,
+			message: `Success`
+		});
+
+	} catch (error) {
+		res.status(400).json({
+			data: [],
+			message: error.message
+		});
+	}
+}
+
+
+const updateFarm = async (req, res) => {
+	try {
+
+		const data = await Portal.updateOne({ _id: req.params.id }, req.body);
+
+		res.status(200).json({
+			data: data,
+			message: `Success`
+		});
+
+	} catch (error) {
+		res.status(400).json({
+			data: [],
+			message: error.message
+		});
+	}
+}
+
+
+const deleteFarm = async (req, res) => {
+	try {
+
+		const data = await Portal.deleteOne({ _id: req.params.id });
+
+		res.status(200).json({
+			data: data,
+			message: `Success`
+		});
+
+	} catch (error) {
+		res.status(400).json({
+			data: [],
+			message: error.message
+		});
+	}
+}
+
+
+const myFarm = async (req, res) => {
+	try {
+
+		const data = await Portal.find().sort({ created_at: 'desc' });
+
+		res.status(200).json({
+			data: data,
+			message: `Success`
+		});
+
+	} catch (error) {
+		res.status(400).json({
+			data: [],
+			message: error.message
+		});
+	}
+}
+
+module.exports = { fetchFarmLocation, saveFarmLocation, getSpecificFarm, setupFarm, updateFarm, deleteFarm, myFarm };
