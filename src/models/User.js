@@ -26,6 +26,14 @@ const UserSchema = mongoose.Schema({
 		type: String,
 		required: true
 	},
+	businessName: {
+		type: String,
+		default: 'NULL'
+	},
+	farmLocation: {
+		type: String,
+		default: 'NULL'
+	},
 	avatar: {
 		type: String,
 		default: 'https://res.cloudinary.com/growng/image/upload/v1652778178/assets/green_icon_wzwmv1.png'
@@ -44,6 +52,22 @@ const UserSchema = mongoose.Schema({
 			phoneNumber: {
 				type: Boolean,
 				default: false
+			}
+		}
+	],
+	notificationSettings: [
+		{
+			allowNotifications: {
+				type: Boolean,
+				default: true
+			},
+			pushNotifications: {
+				type: Boolean,
+				default: true
+			},
+			notificationSound: {
+				type: Boolean,
+				default: true
 			}
 		}
 	],
@@ -89,7 +113,7 @@ UserSchema.statics.findSocialByCredentials = async (email) => {
 	return user;
 };
 
-UserSchema.methods.toJSON = function() {
+UserSchema.methods.toJSON = function () {
 	const user = this;
 
 	const userObject = user.toObject();
@@ -100,7 +124,7 @@ UserSchema.methods.toJSON = function() {
 	return userObject;
 };
 
-UserSchema.methods.generateAuthToken = async function() {
+UserSchema.methods.generateAuthToken = async function () {
 	const user = this;
 	const token = jwt.sign({ _id: user._id.toString() }, process.env.APP_KEY);
 
@@ -112,7 +136,7 @@ UserSchema.methods.generateAuthToken = async function() {
 };
 
 // Hashing a plain text password before saving...
-UserSchema.pre('save', async function(next) {
+UserSchema.pre('save', async function (next) {
 	const user = this;
 
 	if (user.isModified('password')) {

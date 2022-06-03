@@ -10,6 +10,7 @@ require('dotenv').config();
 
 const PORT = process.env.PORT || 4400;
 
+
 // Use Express Middleware
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -21,6 +22,10 @@ app.use('/public', express.static('public'));
 app.use('/api/v1/farm', require('./routes/users/farm'));
 app.use('/api/v1/auth', require('./routes/auth/main'));
 app.use('/api/v1/crop', require('./routes/crop/index'));
+app.use('/api/v1/profile', require('./routes/profile/index'));
+app.use('/api/v1/settings', require('./routes/settings/index'));
+app.use('/api/v1/task', require('./routes/task/index'));
+app.use('/api/v1/notification', require('./routes/notification/index'));
 
 app.use('/', (req, res) => {
 	res.send('Welcome to Growng');
