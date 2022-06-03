@@ -15,6 +15,28 @@ const register = async (req, res) => {
 				status: 'failed'
 			});
 
+		// Generate OTP
+		const code = await Verification.generateVerificationCode();
+
+
+		// Check if User Exist
+		const getUser = await Users.findOne({ email: req.body.email });
+
+		if (getUser) {
+
+			Verification.assignVerificationCode(getUser._id.toString(), code, getUser.email, getUser.phoneNumber);
+
+			return res.status(200).json({
+				data: getUser,
+				code: code,
+				message: 'Registration successful',
+				status: 'success'
+			});
+		}
+
+
+
+
 		const newUser = await Users(req.body).save();
 
 		newUser.isVerified = [
@@ -42,9 +64,6 @@ const register = async (req, res) => {
 		};
 
 		await sendMail(mailInfo);
-
-		// Generate OTP
-		const code = await Verification.generateVerificationCode();
 
 		Verification.assignVerificationCode(newUser._id.toString(), code, newUser.email, newUser.phoneNumber);
 

@@ -58,7 +58,7 @@ verifySchema.statics.assignResetPasswordVerifyCode = async (userId, code, email)
 	const mailInfo = {
 		from: 'GrowNG <info@growng.company>',
 		to: email,
-		subject: `Forgot Password`,
+		subject: `OTP Verification`,
 		template: 'regular',
 		'h:X-Mailgun-Variables': JSON.stringify({
 			message: `Hi use this code to verify it's you: ${code}`
@@ -91,7 +91,7 @@ verifySchema.statics.assignVerificationCode = async (userId, code, email, phoneN
 	const mailInfo = {
 		from: 'GrowNG <info@growng.company>',
 		to: email,
-		subject: `Forgot Password`,
+		subject: `OTP Verification`,
 		template: 'regular',
 		'h:X-Mailgun-Variables': JSON.stringify({
 			message: `Hi use this code to verify it's you: ${code}`
