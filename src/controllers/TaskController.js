@@ -9,10 +9,10 @@ const getTask = async (req, res) => {
         let data;
 
         if (req.query.status != null) {
-            data = await Task.find({ userid: req.user._id, status: req.query.status }).sort({ created_at: 'desc' });
+            data = await Task.find({ userid: req.user._id, farmId: req.query.farmId, status: req.query.status }).sort({ created_at: 'desc' });
         }
         else {
-            data = await Task.find({ userid: req.user._id }).sort({ created_at: 'desc' });
+            data = await Task.find({ userid: req.user._id, farmId: req.query.farmId }).sort({ created_at: 'desc' });
         }
 
 
@@ -37,6 +37,7 @@ const addTask = async (req, res) => {
         req.body.actualStart = dateFormatter(req.body.projectedStart);
         req.body.actualEnd = dateFormatter(req.body.projectedEnd);
         req.body.userId = req.user._id;
+        req.body.farmId = req.query.farmId;
 
         const data = await Task(req.body).save();
 
@@ -64,6 +65,7 @@ const editTask = async (req, res) => {
         req.body.actualStart = dateFormatter(req.body.actualStart);
         req.body.actualEnd = dateFormatter(req.body.actualEnd);
         req.body.userId = req.user._id;
+        req.body.farmId = req.query.farmId;
 
         await Task.updateOne({ _id: req.params.id }, req.body);
 

@@ -5,6 +5,10 @@ const TaskSchema = mongoose.Schema({
         type: String,
         default: 'NULL'
     },
+    farmId: {
+        type: String,
+        default: 'NULL'
+    },
     taskName: {
         type: String,
         default: 'NULL'
