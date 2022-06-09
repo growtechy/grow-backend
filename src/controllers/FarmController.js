@@ -79,6 +79,8 @@ const getSpecificFarm = async (req, res) => {
 const setupFarm = async (req, res) => {
 	try {
 
+		req.body.userId = req.user._id;
+
 		const data = await Portal(req.body).save();
 
 		res.status(200).json({
@@ -136,7 +138,7 @@ const deleteFarm = async (req, res) => {
 const myFarm = async (req, res) => {
 	try {
 
-		const data = await Portal.find().sort({ created_at: 'desc' });
+		const data = await Portal.find({ userId: req.user._id }).sort({ created_at: 'desc' });
 
 		res.status(200).json({
 			data: data,

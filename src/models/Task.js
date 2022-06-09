@@ -23,11 +23,9 @@ const TaskSchema = mongoose.Schema({
     },
     actualStart: {
         type: Date,
-        default: Date.now
     },
     actualEnd: {
         type: Date,
-        default: Date.now
     },
     status: {
         type: String,

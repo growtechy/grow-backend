@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const PortalSchema = mongoose.Schema({
+    userId: {
+        type: String,
+        default: 'NULL'
+    },
     farmName: {
         type: String,
         default: 'NULL'
