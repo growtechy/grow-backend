@@ -27,6 +27,7 @@ app.use('/api/v1/settings', require('./routes/settings/index'));
 app.use('/api/v1/task', require('./routes/task/index'));
 app.use('/api/v1/knowledge', require('./routes/knowledge/index'));
 app.use('/api/v1/notification', require('./routes/notification/index'));
+app.use('/api/v1/rs-training', require('./routes/rs/index'));
 
 app.use('/', (req, res) => {
 	res.send('Welcome to Growng');
