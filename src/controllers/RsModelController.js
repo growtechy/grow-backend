@@ -26,7 +26,7 @@ const fetchTrainingData = async (req, res) => {
 
         //  Read Rows from spreadsheet...
         const getRows = await googleSheets.spreadsheets.values.get({
-            auth, spreadsheetId: process.env.SPREADSHEETID, range: "RS ML Training DB"
+            auth, spreadsheetId: process.env.SPREADSHEETID, range: "Copy of RS ML Training DB"
         });
 
 
