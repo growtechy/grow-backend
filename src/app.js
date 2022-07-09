@@ -28,6 +28,9 @@ app.use('/api/v1/task', require('./routes/task/index'));
 app.use('/api/v1/knowledge', require('./routes/knowledge/index'));
 app.use('/api/v1/notification', require('./routes/notification/index'));
 app.use('/api/v1/rs-training', require('./routes/rs/index'));
+app.use('/api/v1/admin', require('./routes/admin/index'));
+app.use('/api/v1/admin/user', require('./routes/admin/user'));
+app.use('/api/v1/admin/menu', require('./routes/admin/menu'));
 
 app.use('/', (req, res) => {
 	res.send('Welcome to Growng');

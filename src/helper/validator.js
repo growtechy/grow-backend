@@ -21,4 +21,16 @@ const loginValidations = (data) => {
 	return schema.validate(data);
 };
 
-module.exports = { registerValidations, loginValidations };
+
+const adminRegisterValidations = (data) => {
+	const schema = Joi.object({
+		fullname: Joi.string().min(3).max(255).required(),
+		username: Joi.string().min(3).max(30).required(),
+		email: Joi.string().required().email(),
+		password: Joi.string().required()
+	});
+
+	return schema.validate(data);
+};
+
+module.exports = { registerValidations, loginValidations, adminRegisterValidations };
