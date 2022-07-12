@@ -21,6 +21,10 @@ const KnowledgeSchema = mongoose.Schema({
         type: String,
         default: 'NULL'
     },
+    cropFile: {
+        type: String,
+        default: 'https://res.cloudinary.com/growng/image/upload/v1652778178/assets/green_icon_wzwmv1.png'
+    },
 
     created_at: {
         type: Date,

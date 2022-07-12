@@ -1,7 +1,7 @@
 
-const User = require('../models/User');
 const Task = require('../models/Task');
 const notification = require('../models/Notification');
+const Portal = require('../models/Portal');
 
 const getTask = async (req, res) => {
     try {
@@ -36,6 +36,7 @@ const addTask = async (req, res) => {
         req.body.projectedEnd = dateFormatter(req.body.projectedEnd);
         req.body.userId = req.user._id;
         req.body.farmId = req.query.farmId;
+
 
         const data = await Task(req.body).save();
 
@@ -129,6 +130,39 @@ const deleteTask = async (req, res) => {
     }
 }
 
+const getAnalytics = async (req, res) => {
+    try {
+
+        var yy = new Date().getFullYear();
+        var mm = '12';
+        var dd = '31';
+
+        let endCustomDate = new Date(`${yy + '-' + mm + '-' + dd}`).getTime();
+        let startCustomDate = new Date().getTime();
+
+        let newCustomeSeason = endCustomDate - startCustomDate;
+
+        const scheduledTask = (await Task.find({ userId: req.user._id, status: 'scheduled' })).length;
+        const inProgressTask = (await Task.find({ userId: req.user._id, status: 'in-progress' })).length;
+        const completedTask = (await Task.find({ userId: req.user._id, status: 'completed' })).length;
+        const inSeasason = Math.floor(newCustomeSeason / (1000 * 3600 * 24));
+        const daysGained = (await Task.find({ userId: req.user._id, status: 'completed' })).length;
+        const daysLost = (await Task.find({ userId: req.user._id, status: 'completed' })).length;
+
+
+        res.status(200).json({
+            data: { inSeasason, scheduledTask, inProgressTask, completedTask, daysGained, daysLost },
+            message: 'Success'
+        });
+
+    } catch (error) {
+        res.status(400).json({
+            data: [],
+            message: error.message
+        });
+    }
+}
+
 
 function dateFormatter(date) {
     return new Date(date + 'GMT+0');
@@ -145,4 +179,4 @@ function dateDifference(date) {
 
 
 
-module.exports = { getTask, addTask, editTask, deleteTask }
+module.exports = { getTask, addTask, editTask, deleteTask, getAnalytics }

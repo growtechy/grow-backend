@@ -33,4 +33,17 @@ const adminRegisterValidations = (data) => {
 	return schema.validate(data);
 };
 
-module.exports = { registerValidations, loginValidations, adminRegisterValidations };
+
+const createKnowledgeHub = (data) => {
+	const schema = Joi.object({
+		crop: Joi.string().required(),
+		module: Joi.string().required(),
+		title: Joi.string().required(),
+		subTitle: Joi.string().required(),
+		content: Joi.string().required()
+	});
+
+	return schema.validate(data);
+};
+
+module.exports = { registerValidations, loginValidations, adminRegisterValidations, createKnowledgeHub };

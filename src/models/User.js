@@ -33,6 +33,10 @@ const UserSchema = mongoose.Schema({
 		type: String,
 		default: 'NULL'
 	},
+	status: {
+		type: String,
+		default: 'active'
+	},
 	avatar: {
 		type: String,
 		default: 'https://res.cloudinary.com/growng/image/upload/v1652778178/assets/green_icon_wzwmv1.png'

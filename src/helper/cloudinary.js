@@ -30,5 +30,26 @@ const profilePicture = async (route, file, userId) => {
         console.log(error);
     }
 };
+const regularUpload = async (route, file, userId) => {
+    try {
+        const filename = Math.random().toString(16).substr(2, 32);
+        const upload = await cloudinary.uploader.upload(
+            file,
+            {
+                public_id: `growng/${route}/${userId}/${filename}`,
 
-module.exports = { profilePicture };
+            },
+            function (error, result) {
+                if (error) console.log(error);
+
+                return result;
+            }
+        );
+
+        return upload;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+module.exports = { profilePicture, regularUpload };

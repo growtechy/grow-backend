@@ -29,7 +29,7 @@ const TaskSchema = mongoose.Schema({
     },
     status: {
         type: String,
-        default: 'in-progress'
+        default: 'scheduled'
     },
 
     created_at: {

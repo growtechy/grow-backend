@@ -5,6 +5,10 @@ const CropCategorySchema = mongoose.Schema({
         type: String,
         default: 'NULL'
     },
+    category: {
+        type: String,
+        default: 'NULL'
+    },
     image: {
         type: String,
         default: 'NULL'
