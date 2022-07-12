@@ -147,7 +147,7 @@ const getAnalytics = async (req, res) => {
         const completedTask = (await Task.find({ userId: req.user._id, status: 'completed' })).length;
         const inSeasason = Math.floor(newCustomeSeason / (1000 * 3600 * 24));
         const daysGained = (await Task.find({ userId: req.user._id, status: 'completed' })).length;
-        const daysLost = (await Task.find({ userId: req.user._id, status: 'completed' })).length;
+        const daysLost = (await Task.find({ userId: req.user._id, status: 'in-progress' })).length;
 
 
         res.status(200).json({
