@@ -52,10 +52,11 @@ const getAnalytics = async (req, res) => {
         const scheduledTask = (await Task.find({ userId: req.params.id, status: 'scheduled' })).length;
         const inProgressTask = (await Task.find({ userId: req.params.id, status: 'in-progress' })).length;
         const completedTask = (await Task.find({ userId: req.params.id, status: 'completed' })).length;
+        const user = await User.findOne({ _id: req.params.id });
 
 
         res.status(200).json({
-            data: { farm, task, scheduledTask, inProgressTask, completedTask },
+            data: { farm, task, scheduledTask, inProgressTask, completedTask, user },
             message: 'Success'
         });
 
