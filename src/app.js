@@ -19,6 +19,7 @@ app.use(fileupload({ useTempFiles: true }));
 
 // Declare Routes
 app.use('/public', express.static('public'));
+app.use('/api/v1/contact', require('./routes/contact/index'));
 app.use('/api/v1/farm', require('./routes/users/farm'));
 app.use('/api/v1/auth', require('./routes/auth/main'));
 app.use('/api/v1/crop', require('./routes/crop/index'));
