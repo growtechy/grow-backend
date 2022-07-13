@@ -70,11 +70,17 @@ const getAnalytics = async (req, res) => {
 
 const getActivity = async (req, res) => {
     try {
+        var result = [];
+        const history = await notification.find({ userId: req.params.id });
+        const user = await User.findOne({ _id: req.params.id });
 
-        const data = await notification.find({ userId: req.params.id });
+        result.push({
+            history, user
+        })
+
 
         res.status(200).json({
-            data,
+            data: Object.assign(...result),
             message: 'Success'
         });
 
