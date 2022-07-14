@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const sendMail = require('../mailer/mails');
-const sendSMS = require('../mailer/sms');
+const smsSender = require('../mailer/sms');
 const Users = require('../models/User');
 
 const verifySchema = mongoose.Schema({
@@ -86,7 +86,7 @@ verifySchema.statics.assignVerificationCode = async (userId, code, email, phoneN
 
 	var message = `Hi, use this code to verify your telephone: ${code}`;
 
-	await sendSMS(phoneNumber, message);
+	await smsSender.sendSMS(phoneNumber, message);
 
 	const mailInfo = {
 		from: 'GrowNG <info@growng.company>',
@@ -137,7 +137,7 @@ verifySchema.statics.verifyPhoneNumber = async (userId, code, phoneNumber) => {
 
 	var message = `Hi, use this code to verify your telephone: ${code}`;
 
-	await sendSMS(phoneNumber, message);
+	await smsSender.sendSMS(phoneNumber, message);
 
 	return code;
 };
